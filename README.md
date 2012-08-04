@@ -1,4 +1,6 @@
 songkhue.se303
 ==============
 
-Open Source
+This is simple example of learning.
+
+www.songkhue.com
