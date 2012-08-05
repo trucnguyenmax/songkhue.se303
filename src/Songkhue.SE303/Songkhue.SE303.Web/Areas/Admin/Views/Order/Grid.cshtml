@@ -1,0 +1,8 @@
+﻿@using GridMvc.Html
+@using GridMvc
+@model IEnumerable<Songkhue.SE303.Core.Sk_Order>
+@Html.Grid(Model).Columns(columns =>
+           {
+               columns.Add(x => x.Id).Titled("ID").Width(50);
+               columns.Add(x => x.CreatedOn).Sortable(true);
+           }).WithPaging(20)

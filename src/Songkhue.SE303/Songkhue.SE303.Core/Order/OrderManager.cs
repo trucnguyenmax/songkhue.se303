@@ -10,16 +10,25 @@ namespace Songkhue.SE303.Core.Order
         private Dev_Sk_SE303Entities _context;
         private Repository<Sk_Order> _reporsitory;
 
-        private OrderManager()
+        public OrderManager()
         {
             _context = new Dev_Sk_SE303Entities();
             _reporsitory = new Repository<Sk_Order>(_context, true);
         }
 
-        public IQueryable<Sk_Order> GetOrders(DateTime date)
+        public IEnumerable<Sk_Order> GetOrders()
         {
             // remove time
-            return _reporsitory.Fetch().Where(x => DateTime.Parse(x.CreatedOn.ToShortDateString()) == date);
+            return _reporsitory.Fetch()
+                .OrderByDescending(x => x.CreatedOn)
+                .AsEnumerable();
+        }
+
+        public IEnumerable<Sk_Order> GetOrders(DateTime date)
+        {
+            return _reporsitory.Fetch().OrderByDescending(x => x.CreatedOn)
+                .Where(x => DateTime.Parse(x.CreatedOn.ToShortDateString()) == date)
+                .AsEnumerable();
         }
     }
 }
