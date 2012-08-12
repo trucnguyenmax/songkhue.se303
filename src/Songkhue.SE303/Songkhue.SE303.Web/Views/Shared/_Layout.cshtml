@@ -18,8 +18,9 @@
             </div>
             <nav>
                 <ul id="menu">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { @Area = string.Empty }, new { })</li>
+                    <li>@Html.ActionLink("About", "About", "Home", new { @Area = string.Empty }, new { })</li>
+                    <li>@Html.ActionLink("Nhân viên", "Index", "Employee", new { @Area = "Admin" }, new { })</li>
                     <li>@Html.ActionLink("Hóa đơn", "Grid", "Order", new { @Area = "Admin" }, new { })</li>
                 </ul>
             </nav>

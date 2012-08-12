@@ -6,13 +6,14 @@ using System.Web.Mvc;
 using Songkhue.SE303.Core;
 using Songkhue.SE303.Web.Models;
 
-namespace Songkhue.SE303.Web.Controllers
+namespace Songkhue.SE303.Web.Areas.Admin.Controllers
 {
     public class EmployeeController : Controller
     {
         //
         // GET: /Employee/
         Dev_Sk_SE303Entities db = new Dev_Sk_SE303Entities();
+        [HttpGet]
         public ActionResult Index()
         {
             return View(EmployeeModels.employeeList());
