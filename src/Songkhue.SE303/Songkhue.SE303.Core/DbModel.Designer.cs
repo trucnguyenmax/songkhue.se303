@@ -100,22 +100,6 @@ namespace Songkhue.SE303.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Sk_Order> Sk_Order
-        {
-            get
-            {
-                if ((_Sk_Order == null))
-                {
-                    _Sk_Order = base.CreateObjectSet<Sk_Order>("Sk_Order");
-                }
-                return _Sk_Order;
-            }
-        }
-        private ObjectSet<Sk_Order> _Sk_Order;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Sk_User> Sk_User
         {
             get
@@ -128,6 +112,38 @@ namespace Songkhue.SE303.Core
             }
         }
         private ObjectSet<Sk_User> _Sk_User;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Sk_OrderDetails> Sk_OrderDetails
+        {
+            get
+            {
+                if ((_Sk_OrderDetails == null))
+                {
+                    _Sk_OrderDetails = base.CreateObjectSet<Sk_OrderDetails>("Sk_OrderDetails");
+                }
+                return _Sk_OrderDetails;
+            }
+        }
+        private ObjectSet<Sk_OrderDetails> _Sk_OrderDetails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Sk_Order> Sk_Order
+        {
+            get
+            {
+                if ((_Sk_Order == null))
+                {
+                    _Sk_Order = base.CreateObjectSet<Sk_Order>("Sk_Order");
+                }
+                return _Sk_Order;
+            }
+        }
+        private ObjectSet<Sk_Order> _Sk_Order;
 
         #endregion
 
@@ -150,19 +166,27 @@ namespace Songkhue.SE303.Core
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Sk_Order EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToSk_Order(Sk_Order sk_Order)
-        {
-            base.AddObject("Sk_Order", sk_Order);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Sk_User EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToSk_User(Sk_User sk_User)
         {
             base.AddObject("Sk_User", sk_User);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Sk_OrderDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSk_OrderDetails(Sk_OrderDetails sk_OrderDetails)
+        {
+            base.AddObject("Sk_OrderDetails", sk_OrderDetails);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Sk_Order EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSk_Order(Sk_Order sk_Order)
+        {
+            base.AddObject("Sk_Order", sk_Order);
         }
 
         #endregion
@@ -483,18 +507,14 @@ namespace Songkhue.SE303.Core
         /// Create a new Sk_Order object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="createdOn">Initial value of the CreatedOn property.</param>
         /// <param name="branchId">Initial value of the BranchId property.</param>
-        /// <param name="tableId">Initial value of the TableId property.</param>
-        /// <param name="quantity">Initial value of the Quantity property.</param>
-        public static Sk_Order CreateSk_Order(global::System.Int32 id, global::System.DateTime createdOn, global::System.Int32 branchId, global::System.Int32 tableId, global::System.Int32 quantity)
+        /// <param name="createdOn">Initial value of the CreatedOn property.</param>
+        public static Sk_Order CreateSk_Order(global::System.Int32 id, global::System.Int32 branchId, global::System.DateTime createdOn)
         {
             Sk_Order sk_Order = new Sk_Order();
             sk_Order.Id = id;
-            sk_Order.CreatedOn = createdOn;
             sk_Order.BranchId = branchId;
-            sk_Order.TableId = tableId;
-            sk_Order.Quantity = quantity;
+            sk_Order.CreatedOn = createdOn;
             return sk_Order;
         }
 
@@ -534,30 +554,6 @@ namespace Songkhue.SE303.Core
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime CreatedOn
-        {
-            get
-            {
-                return _CreatedOn;
-            }
-            set
-            {
-                OnCreatedOnChanging(value);
-                ReportPropertyChanging("CreatedOn");
-                _CreatedOn = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedOn");
-                OnCreatedOnChanged();
-            }
-        }
-        private global::System.DateTime _CreatedOn;
-        partial void OnCreatedOnChanging(global::System.DateTime value);
-        partial void OnCreatedOnChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Int32 BranchId
         {
             get
@@ -582,24 +578,139 @@ namespace Songkhue.SE303.Core
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 TableId
+        public global::System.DateTime CreatedOn
         {
             get
             {
-                return _TableId;
+                return _CreatedOn;
             }
             set
             {
-                OnTableIdChanging(value);
-                ReportPropertyChanging("TableId");
-                _TableId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("TableId");
-                OnTableIdChanged();
+                OnCreatedOnChanging(value);
+                ReportPropertyChanging("CreatedOn");
+                _CreatedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedOn");
+                OnCreatedOnChanged();
             }
         }
-        private global::System.Int32 _TableId;
-        partial void OnTableIdChanging(global::System.Int32 value);
-        partial void OnTableIdChanged();
+        private global::System.DateTime _CreatedOn;
+        partial void OnCreatedOnChanging(global::System.DateTime value);
+        partial void OnCreatedOnChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Dev_Sk_SE303Model", Name="Sk_OrderDetails")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Sk_OrderDetails : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Sk_OrderDetails object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="orderId">Initial value of the OrderId property.</param>
+        /// <param name="itemId">Initial value of the ItemId property.</param>
+        /// <param name="quantity">Initial value of the Quantity property.</param>
+        /// <param name="price">Initial value of the Price property.</param>
+        /// <param name="tableId">Initial value of the TableId property.</param>
+        public static Sk_OrderDetails CreateSk_OrderDetails(global::System.Int32 id, global::System.Int32 orderId, global::System.Int32 itemId, global::System.Int32 quantity, global::System.Double price, global::System.Int32 tableId)
+        {
+            Sk_OrderDetails sk_OrderDetails = new Sk_OrderDetails();
+            sk_OrderDetails.Id = id;
+            sk_OrderDetails.OrderId = orderId;
+            sk_OrderDetails.ItemId = itemId;
+            sk_OrderDetails.Quantity = quantity;
+            sk_OrderDetails.Price = price;
+            sk_OrderDetails.TableId = tableId;
+            return sk_OrderDetails;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OrderId
+        {
+            get
+            {
+                return _OrderId;
+            }
+            set
+            {
+                OnOrderIdChanging(value);
+                ReportPropertyChanging("OrderId");
+                _OrderId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OrderId");
+                OnOrderIdChanged();
+            }
+        }
+        private global::System.Int32 _OrderId;
+        partial void OnOrderIdChanging(global::System.Int32 value);
+        partial void OnOrderIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ItemId
+        {
+            get
+            {
+                return _ItemId;
+            }
+            set
+            {
+                OnItemIdChanging(value);
+                ReportPropertyChanging("ItemId");
+                _ItemId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ItemId");
+                OnItemIdChanged();
+            }
+        }
+        private global::System.Int32 _ItemId;
+        partial void OnItemIdChanging(global::System.Int32 value);
+        partial void OnItemIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -624,6 +735,54 @@ namespace Songkhue.SE303.Core
         private global::System.Int32 _Quantity;
         partial void OnQuantityChanging(global::System.Int32 value);
         partial void OnQuantityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Price
+        {
+            get
+            {
+                return _Price;
+            }
+            set
+            {
+                OnPriceChanging(value);
+                ReportPropertyChanging("Price");
+                _Price = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Price");
+                OnPriceChanged();
+            }
+        }
+        private global::System.Double _Price;
+        partial void OnPriceChanging(global::System.Double value);
+        partial void OnPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TableId
+        {
+            get
+            {
+                return _TableId;
+            }
+            set
+            {
+                OnTableIdChanging(value);
+                ReportPropertyChanging("TableId");
+                _TableId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TableId");
+                OnTableIdChanged();
+            }
+        }
+        private global::System.Int32 _TableId;
+        partial void OnTableIdChanging(global::System.Int32 value);
+        partial void OnTableIdChanged();
 
         #endregion
 

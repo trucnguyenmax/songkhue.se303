@@ -4,11 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Dev_Sk_SE303Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="Dev_Sk_SE303Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="Dev_Sk_SE303ModelStoreContainer">
           <EntitySet Name="Sk_Branch" EntityType="Dev_Sk_SE303Model.Store.Sk_Branch" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Sk_Item" EntityType="Dev_Sk_SE303Model.Store.Sk_Item" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Sk_Order" EntityType="Dev_Sk_SE303Model.Store.Sk_Order" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sk_OrderDetails" EntityType="Dev_Sk_SE303Model.Store.Sk_OrderDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Sk_User" EntityType="Dev_Sk_SE303Model.Store.Sk_User" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
         <EntityType Name="Sk_Branch">
@@ -34,11 +35,20 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="BranchId" Type="int" Nullable="false" />
-          <Property Name="TableId" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sk_OrderDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="TableId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Sk_User">
           <Key>
@@ -49,23 +59,23 @@
           <Property Name="Username" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="Email" Type="varchar" Nullable="false" MaxLength="255" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Dev_Sk_SE303Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="Dev_Sk_SE303Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Sk_Branch" EntityType="Dev_Sk_SE303Model.Sk_Branch" />
           <EntitySet Name="Sk_Item" EntityType="Dev_Sk_SE303Model.Sk_Item" />
-          <EntitySet Name="Sk_Order" EntityType="Dev_Sk_SE303Model.Sk_Order" />
           <EntitySet Name="Sk_User" EntityType="Dev_Sk_SE303Model.Sk_User" />
+          <EntitySet Name="Sk_OrderDetails" EntityType="Dev_Sk_SE303Model.Sk_OrderDetails" />
+          <EntitySet Name="Sk_Order" EntityType="Dev_Sk_SE303Model.Sk_Order" />
         </EntityContainer>
         <EntityType Name="Sk_Branch">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
           <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
@@ -74,29 +84,38 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="ItemGroup" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Sk_Order">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
-          <Property Name="BranchId" Type="Int32" Nullable="false" />
-          <Property Name="TableId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Sk_User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Sk_OrderDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="OrderId" Nullable="false" />
+          <Property Type="Int32" Name="ItemId" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Double" Name="Price" Nullable="false" />
+          <Property Type="Int32" Name="TableId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sk_Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="BranchId" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -125,17 +144,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sk_Order">
-            <EntityTypeMapping TypeName="Dev_Sk_SE303Model.Sk_Order">
-              <MappingFragment StoreEntitySet="Sk_Order">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
-                <ScalarProperty Name="TableId" ColumnName="TableId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sk_User">
             <EntityTypeMapping TypeName="Dev_Sk_SE303Model.Sk_User">
               <MappingFragment StoreEntitySet="Sk_User">
@@ -143,6 +151,27 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sk_OrderDetails">
+            <EntityTypeMapping TypeName="Dev_Sk_SE303Model.Sk_OrderDetails">
+              <MappingFragment StoreEntitySet="Sk_OrderDetails">
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sk_Order">
+            <EntityTypeMapping TypeName="Dev_Sk_SE303Model.Sk_Order">
+              <MappingFragment StoreEntitySet="Sk_Order">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -167,10 +196,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="DbModel">
-        <EntityTypeShape EntityType="Dev_Sk_SE303Model.Sk_Branch" Width="1.5" PointX="0.75" PointY="0.75" Height="1.787985026041667" IsExpanded="true" />
-        <EntityTypeShape EntityType="Dev_Sk_SE303Model.Sk_Item" Width="1.5" PointX="2.75" PointY="0.75" Height="1.9802864583333335" IsExpanded="true" />
-        <EntityTypeShape EntityType="Dev_Sk_SE303Model.Sk_Order" Width="1.5" PointX="0.75" PointY="3.75" Height="1.9802864583333322" IsExpanded="true" />
-        <EntityTypeShape EntityType="Dev_Sk_SE303Model.Sk_User" Width="1.5" PointX="2.75" PointY="3.75" Height="1.7879850260416657" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dev_Sk_SE303Model.Sk_Order" Width="1.5" PointX="9.24653636908463" PointY="11.964385008422838" />
       </Diagram>
     </Diagrams>
   </Designer>

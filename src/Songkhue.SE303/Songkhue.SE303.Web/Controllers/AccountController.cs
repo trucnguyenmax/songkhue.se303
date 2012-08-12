@@ -189,5 +189,10 @@ namespace Songkhue.SE303.Web.Controllers
             }
         }
         #endregion
+
+        public ActionResult Login()
+        {
+            return View();
+        }
     }
 }

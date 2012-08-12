@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Songkhue.SE303.Core;
 using Songkhue.SE303.Core.Order;
+using Songkhue.SE303.Core.Order.Models;
+
 
 namespace Songkhue.SE303.Web.Areas.Admin.Controllers
 {
@@ -23,8 +25,11 @@ namespace Songkhue.SE303.Web.Areas.Admin.Controllers
         public ActionResult Grid()
         {
 
-            var items = _orderManager.GetOrders();
-            return View(items);
+            var entities = _orderManager.GetOrders();
+
+            var model = OrderModel.ToModelList(entities);
+
+            return View(model);
         }
 
     }

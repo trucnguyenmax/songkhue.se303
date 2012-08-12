@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Songkhue.SE303.Core", "Songkhue.SE303.Core\Songkhue.SE303.Core.csproj", "{85E5FECD-8333-4C2F-80F3-CBFB0BC5B343}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Songkhue.SE303.Web", "Songkhue.SE303.Web\Songkhue.SE303.Web.csproj", "{FC7F5A0F-35E4-4480-934E-1D409C317F3A}"

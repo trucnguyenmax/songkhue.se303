@@ -1,8 +1,49 @@
 ﻿@using GridMvc.Html
 @using GridMvc
-@model IEnumerable<Songkhue.SE303.Core.Sk_Order>
+@using Telerik.Web.Mvc.UI
+@model IEnumerable<Songkhue.SE303.Core.Order.Models.OrderModel>
+@{
+    Songkhue.SE303.Core.Order.OrderDetailsManager _orderDetailsManager = new Songkhue.SE303.Core.Order.OrderDetailsManager();
+
+    int orderId = 0;
+    IEnumerable<Songkhue.SE303.Core.Sk_OrderDetails> orderDetails = new List<Songkhue.SE303.Core.Sk_OrderDetails>();
+    if (Request.QueryString["order"] != null)
+    {
+        int.TryParse(Request.QueryString["order"].ToString(), out orderId);
+        orderDetails = _orderDetailsManager.GetOrderDetails(orderId);
+    }
+}
+@(Html.Telerik().Grid(Model).Name("Grid")
+                        .Columns(columns =>
+        {
+            columns.Bound(o => o.Id).Width(50).Title("ID");
+            columns.Bound(o => o.BranchName);
+
+            columns.Bound(o => o.Total);
+            columns.Bound(o => o.CreatedOn);           
+            columns.Bound(x => x.Id)
+                .Width(50)
+
+                .Template(x => Html.ActionLink("Edit", "Grid", new { order = x.Id }))
+                .ClientTemplate("<a href=\"Grid/<#= order #>\">" + "#" + "</a>")
+                .Title("#");
+        }))
 @Html.Grid(Model).Columns(columns =>
            {
-               columns.Add(x => x.Id).Titled("ID").Width(50);
+               columns.Add(x => x.Id).Titled("Mã hóa đơn").Width(100).Format("#{0}");
+               columns.Add(x => x.BranchName).Titled("Chi nhánh");
+               columns.Add(x => x.Total).Titled("Tổng tiền").Format("{0:#,###} VND");
                columns.Add(x => x.CreatedOn).Sortable(true);
+
            }).WithPaging(20)
+<h1>Chi tiết hóa đơn</h1>
+@if (orderId > 0)
+{
+    @Html.Grid(orderDetails).Columns(columns =>
+           {
+               columns.Add(x => x.Id).Titled("Mã hóa đơn").Width(100).Format("#{0}");
+               columns.Add(x => x.Quantity).Titled("Số lượng");
+               columns.Add(x => x.Price).Titled("Giá bán").Format("{0:#,###} VND");
+
+           }).WithPaging(20)
+}
