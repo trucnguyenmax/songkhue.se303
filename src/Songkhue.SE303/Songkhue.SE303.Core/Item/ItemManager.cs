@@ -18,12 +18,15 @@ namespace Songkhue.SE303.Core.Item
 
         public void Add(Sk_Item item)
         {
+            item.CreatedOn = DateTime.Now;
+
             _reporsitory.Add(item);
             _reporsitory.SaveChanges();
         }
 
         public void Update(Sk_Item item)
         {
+            item.CreatedOn = DateTime.Now;
             _reporsitory.Edit(item);
             _reporsitory.SaveChanges();
         }
@@ -47,6 +50,11 @@ namespace Songkhue.SE303.Core.Item
         public IEnumerable<Sk_Item> GetItemsByGroup(int group)
         {
             return _reporsitory.Fetch().Where(x => x.ItemGroup == group).OrderByDescending(x => x.Id).AsEnumerable();
+        }
+
+        public IEnumerable<Sk_Item> GetAllItems()
+        {
+            return _reporsitory.Fetch().OrderByDescending(x => x.Id).AsEnumerable();
         }
     }
 }

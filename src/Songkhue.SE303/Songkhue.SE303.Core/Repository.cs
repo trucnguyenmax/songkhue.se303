@@ -54,7 +54,7 @@ namespace Songkhue.SE303.Core
 
         public void Edit(T entity)
         {
-            _context.ObjectStateManager.ChangeObjectState(entity, EntityState.Unchanged);
+            //_context.ObjectStateManager.ChangeObjectState(entity, EntityState.Unchanged);
             _objectSet.Attach(entity);
             _context.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
         }

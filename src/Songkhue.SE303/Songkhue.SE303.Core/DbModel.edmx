@@ -11,6 +11,19 @@
           <EntitySet Name="Sk_Order" EntityType="Dev_Sk_SE303Model.Store.Sk_Order" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Sk_OrderDetails" EntityType="Dev_Sk_SE303Model.Store.Sk_OrderDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Sk_User" EntityType="Dev_Sk_SE303Model.Store.Sk_User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="Dev_Sk_SE303Model.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Sk_Order_Sk_Branch" Association="Dev_Sk_SE303Model.Store.FK_Sk_Order_Sk_Branch">
+            <End Role="Sk_Branch" EntitySet="Sk_Branch" />
+            <End Role="Sk_Order" EntitySet="Sk_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sk_OrderDetails_Sk_Item" Association="Dev_Sk_SE303Model.Store.FK_Sk_OrderDetails_Sk_Item">
+            <End Role="Sk_Item" EntitySet="Sk_Item" />
+            <End Role="Sk_OrderDetails" EntitySet="Sk_OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sk_OrderDetails_Sk_Order" Association="Dev_Sk_SE303Model.Store.FK_Sk_OrderDetails_Sk_Order">
+            <End Role="Sk_Order" EntitySet="Sk_Order" />
+            <End Role="Sk_OrderDetails" EntitySet="Sk_OrderDetails" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Sk_Branch">
           <Key>
@@ -25,7 +38,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="300" />
           <Property Name="Price" Type="float" Nullable="false" />
@@ -59,44 +72,95 @@
           <Property Name="Username" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="Email" Type="varchar" Nullable="false" MaxLength="255" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Sk_Order_Sk_Branch">
+          <End Role="Sk_Branch" Type="Dev_Sk_SE303Model.Store.Sk_Branch" Multiplicity="1" />
+          <End Role="Sk_Order" Type="Dev_Sk_SE303Model.Store.Sk_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sk_Branch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sk_Order">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sk_OrderDetails_Sk_Item">
+          <End Role="Sk_Item" Type="Dev_Sk_SE303Model.Store.Sk_Item" Multiplicity="1" />
+          <End Role="Sk_OrderDetails" Type="Dev_Sk_SE303Model.Store.Sk_OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sk_Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sk_OrderDetails">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sk_OrderDetails_Sk_Order">
+          <End Role="Sk_Order" Type="Dev_Sk_SE303Model.Store.Sk_Order" Multiplicity="1" />
+          <End Role="Sk_OrderDetails" Type="Dev_Sk_SE303Model.Store.Sk_OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sk_Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sk_OrderDetails">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Dev_Sk_SE303Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="Dev_Sk_SE303Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Sk_Branch" EntityType="Dev_Sk_SE303Model.Sk_Branch" />
-          <EntitySet Name="Sk_Item" EntityType="Dev_Sk_SE303Model.Sk_Item" />
-          <EntitySet Name="Sk_User" EntityType="Dev_Sk_SE303Model.Sk_User" />
-          <EntitySet Name="Sk_OrderDetails" EntityType="Dev_Sk_SE303Model.Sk_OrderDetails" />
           <EntitySet Name="Sk_Order" EntityType="Dev_Sk_SE303Model.Sk_Order" />
+          <EntitySet Name="Sk_OrderDetails" EntityType="Dev_Sk_SE303Model.Sk_OrderDetails" />
+          <EntitySet Name="Sk_User" EntityType="Dev_Sk_SE303Model.Sk_User" />
+          <EntitySet Name="sysdiagrams" EntityType="Dev_Sk_SE303Model.sysdiagram" />
+          <AssociationSet Name="FK_Sk_Order_Sk_Branch" Association="Dev_Sk_SE303Model.FK_Sk_Order_Sk_Branch">
+            <End Role="Sk_Branch" EntitySet="Sk_Branch" />
+            <End Role="Sk_Order" EntitySet="Sk_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sk_OrderDetails_Sk_Order" Association="Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Order">
+            <End Role="Sk_Order" EntitySet="Sk_Order" />
+            <End Role="Sk_OrderDetails" EntitySet="Sk_OrderDetails" />
+          </AssociationSet>
+          <EntitySet Name="Sk_Item" EntityType="Dev_Sk_SE303Model.Sk_Item" />
+          <AssociationSet Name="FK_Sk_OrderDetails_Sk_Item" Association="Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Item">
+            <End Role="Sk_Item" EntitySet="Sk_Item" />
+            <End Role="Sk_OrderDetails" EntitySet="Sk_OrderDetails" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Sk_Branch">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sk_Order" Relationship="Dev_Sk_SE303Model.FK_Sk_Order_Sk_Branch" FromRole="Sk_Branch" ToRole="Sk_Order" />
         </EntityType>
-        <EntityType Name="Sk_Item">
+        <EntityType Name="Sk_Order">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
-          <Property Name="Price" Type="Double" Nullable="false" />
-          <Property Name="ItemGroup" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Sk_User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="BranchId" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
+          <NavigationProperty Name="Sk_Branch" Relationship="Dev_Sk_SE303Model.FK_Sk_Order_Sk_Branch" FromRole="Sk_Order" ToRole="Sk_Branch" />
+          <NavigationProperty Name="Sk_OrderDetails" Relationship="Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Order" FromRole="Sk_Order" ToRole="Sk_OrderDetails" />
         </EntityType>
         <EntityType Name="Sk_OrderDetails">
           <Key>
@@ -108,16 +172,76 @@
           <Property Type="Int32" Name="Quantity" Nullable="false" />
           <Property Type="Double" Name="Price" Nullable="false" />
           <Property Type="Int32" Name="TableId" Nullable="false" />
+          <NavigationProperty Name="Sk_Order" Relationship="Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Order" FromRole="Sk_OrderDetails" ToRole="Sk_Order" />
+          <NavigationProperty Name="Sk_Item" Relationship="Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Item" FromRole="Sk_OrderDetails" ToRole="Sk_Item" />
         </EntityType>
-        <EntityType Name="Sk_Order">
+        <EntityType Name="Sk_User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="BranchId" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
-      </Schema>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Sk_Order_Sk_Branch">
+          <End Type="Dev_Sk_SE303Model.Sk_Branch" Role="Sk_Branch" Multiplicity="1" />
+          <End Type="Dev_Sk_SE303Model.Sk_Order" Role="Sk_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sk_Branch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sk_Order">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sk_OrderDetails_Sk_Order">
+          <End Type="Dev_Sk_SE303Model.Sk_Order" Role="Sk_Order" Multiplicity="1" />
+          <End Type="Dev_Sk_SE303Model.Sk_OrderDetails" Role="Sk_OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sk_Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sk_OrderDetails">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sk_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="Double" Name="Price" Nullable="false" />
+          <Property Type="Int32" Name="ItemGroup" Nullable="false" />
+          <NavigationProperty Name="Sk_OrderDetails" Relationship="Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Item" FromRole="Sk_Item" ToRole="Sk_OrderDetails" />
+        </EntityType>
+        <Association Name="FK_Sk_OrderDetails_Sk_Item">
+          <End Type="Dev_Sk_SE303Model.Sk_Item" Role="Sk_Item" Multiplicity="1" />
+          <End Type="Dev_Sk_SE303Model.Sk_OrderDetails" Role="Sk_OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sk_Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sk_OrderDetails">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -126,31 +250,19 @@
           <EntitySetMapping Name="Sk_Branch">
             <EntityTypeMapping TypeName="Dev_Sk_SE303Model.Sk_Branch">
               <MappingFragment StoreEntitySet="Sk_Branch">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sk_Item">
-            <EntityTypeMapping TypeName="Dev_Sk_SE303Model.Sk_Item">
-              <MappingFragment StoreEntitySet="Sk_Item">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="ItemGroup" ColumnName="ItemGroup" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sk_User">
-            <EntityTypeMapping TypeName="Dev_Sk_SE303Model.Sk_User">
-              <MappingFragment StoreEntitySet="Sk_User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <EntitySetMapping Name="Sk_Order">
+            <EntityTypeMapping TypeName="Dev_Sk_SE303Model.Sk_Order">
+              <MappingFragment StoreEntitySet="Sk_Order">
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -166,11 +278,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sk_Order">
-            <EntityTypeMapping TypeName="Dev_Sk_SE303Model.Sk_Order">
-              <MappingFragment StoreEntitySet="Sk_Order">
+          <EntitySetMapping Name="Sk_User">
+            <EntityTypeMapping TypeName="Dev_Sk_SE303Model.Sk_User">
+              <MappingFragment StoreEntitySet="Sk_User">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Dev_Sk_SE303Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sk_Item">
+            <EntityTypeMapping TypeName="Dev_Sk_SE303Model.Sk_Item">
+              <MappingFragment StoreEntitySet="Sk_Item">
+                <ScalarProperty Name="ItemGroup" ColumnName="ItemGroup" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -196,7 +331,25 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="DbModel">
-        <EntityTypeShape EntityType="Dev_Sk_SE303Model.Sk_Order" Width="1.5" PointX="9.24653636908463" PointY="11.964385008422838" />
+        <EntityTypeShape EntityType="Dev_Sk_SE303Model.Sk_Branch" Width="1.5" PointX="0.75" PointY="1.25" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="Dev_Sk_SE303Model.Sk_Order" Width="1.5" PointX="3" PointY="1.25" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="Dev_Sk_SE303Model.Sk_OrderDetails" Width="1.5" PointX="5.25" PointY="1" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="Dev_Sk_SE303Model.Sk_User" Width="1.5" PointX="5.75" PointY="4.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="Dev_Sk_SE303Model.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" Height="1.9802864583333353" />
+        <AssociationConnector Association="Dev_Sk_SE303Model.FK_Sk_Order_Sk_Branch" >
+          <ConnectorPoint PointX="2.25" PointY="2.2401432291666659" />
+          <ConnectorPoint PointX="3" PointY="2.2401432291666659" />
+        </AssociationConnector>
+        <AssociationConnector Association="Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Order" >
+          <ConnectorPoint PointX="4.5" PointY="2.2401432291666659" />
+          <ConnectorPoint PointX="5.25" PointY="2.2401432291666659" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Dev_Sk_SE303Model.Sk_Item" Width="1.5" PointX="0.75" PointY="4.875" Height="2.1725878906250031" />
+        <AssociationConnector Association="Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Item" >
+          <ConnectorPoint PointX="2.25" PointY="6.8240364583333353" />
+          <ConnectorPoint PointX="5.46875" PointY="6.8240364583333353" />
+          <ConnectorPoint PointX="5.46875" PointY="3.5571907552083331" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>

@@ -1,0 +1,38 @@
+﻿@using Songkhue.SE303.Core
+@model Sk_Item
+@{
+    ViewBag.Title = "Sửa thực đơn";
+}
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Thực đơn</legend>
+        <div class="editor-label">
+            Tên món
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <div class="editor-label">
+            Giá
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            <select id="group" name="group">
+                <option value="1">Thức uống</option>
+                <option value="2">Đồ ăn</option>
+            </select>
+        </div>
+        <p>
+            <input type="submit" value="Sửa" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

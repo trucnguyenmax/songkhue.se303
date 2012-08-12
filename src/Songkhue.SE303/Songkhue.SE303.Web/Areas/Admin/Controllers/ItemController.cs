@@ -23,17 +23,51 @@ namespace Songkhue.SE303.Web.Areas.Admin.Controllers
 
         public ActionResult Index(int? group)
         {
-            IEnumerable<Sk_Item> entities ;
+            IEnumerable<Sk_Item> entities;
             if (group.HasValue)
             {
                 entities = _itemManager.GetItemsByGroup(group.Value);
             }
             else
             {
-                entities = _itemManager.GetItemsByGroup(1);
+                entities = _itemManager.GetAllItems();
             }
 
             return View(entities);
+        }
+
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Add(Sk_Item model, FormCollection form)
+        {
+            model.ItemGroup = int.Parse(form["group"].ToString());
+            _itemManager.Add(model);
+
+
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var model = _itemManager.GetItemById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Sk_Item model, FormCollection form)
+        {
+            model.ItemGroup = int.Parse(form["group"].ToString());
+            _itemManager.Update(model);
+
+
+            return RedirectToAction("Index");
+
         }
     }
 }

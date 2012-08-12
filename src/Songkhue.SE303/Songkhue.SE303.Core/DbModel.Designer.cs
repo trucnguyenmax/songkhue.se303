@@ -17,6 +17,14 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
+#region EDM Relationship Metadata
+
+[assembly: EdmRelationshipAttribute("Dev_Sk_SE303Model", "FK_Sk_Order_Sk_Branch", "Sk_Branch", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Songkhue.SE303.Core.Sk_Branch), "Sk_Order", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Songkhue.SE303.Core.Sk_Order), true)]
+[assembly: EdmRelationshipAttribute("Dev_Sk_SE303Model", "FK_Sk_OrderDetails_Sk_Order", "Sk_Order", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Songkhue.SE303.Core.Sk_Order), "Sk_OrderDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Songkhue.SE303.Core.Sk_OrderDetails), true)]
+[assembly: EdmRelationshipAttribute("Dev_Sk_SE303Model", "FK_Sk_OrderDetails_Sk_Item", "Sk_Item", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Songkhue.SE303.Core.Sk_Item), "Sk_OrderDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Songkhue.SE303.Core.Sk_OrderDetails), true)]
+
+#endregion
+
 namespace Songkhue.SE303.Core
 {
     #region Contexts
@@ -84,34 +92,18 @@ namespace Songkhue.SE303.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Sk_Item> Sk_Item
+        public ObjectSet<Sk_Order> Sk_Order
         {
             get
             {
-                if ((_Sk_Item == null))
+                if ((_Sk_Order == null))
                 {
-                    _Sk_Item = base.CreateObjectSet<Sk_Item>("Sk_Item");
+                    _Sk_Order = base.CreateObjectSet<Sk_Order>("Sk_Order");
                 }
-                return _Sk_Item;
+                return _Sk_Order;
             }
         }
-        private ObjectSet<Sk_Item> _Sk_Item;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Sk_User> Sk_User
-        {
-            get
-            {
-                if ((_Sk_User == null))
-                {
-                    _Sk_User = base.CreateObjectSet<Sk_User>("Sk_User");
-                }
-                return _Sk_User;
-            }
-        }
-        private ObjectSet<Sk_User> _Sk_User;
+        private ObjectSet<Sk_Order> _Sk_Order;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -132,18 +124,50 @@ namespace Songkhue.SE303.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Sk_Order> Sk_Order
+        public ObjectSet<Sk_User> Sk_User
         {
             get
             {
-                if ((_Sk_Order == null))
+                if ((_Sk_User == null))
                 {
-                    _Sk_Order = base.CreateObjectSet<Sk_Order>("Sk_Order");
+                    _Sk_User = base.CreateObjectSet<Sk_User>("Sk_User");
                 }
-                return _Sk_Order;
+                return _Sk_User;
             }
         }
-        private ObjectSet<Sk_Order> _Sk_Order;
+        private ObjectSet<Sk_User> _Sk_User;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<sysdiagram> sysdiagrams
+        {
+            get
+            {
+                if ((_sysdiagrams == null))
+                {
+                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
+                }
+                return _sysdiagrams;
+            }
+        }
+        private ObjectSet<sysdiagram> _sysdiagrams;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Sk_Item> Sk_Item
+        {
+            get
+            {
+                if ((_Sk_Item == null))
+                {
+                    _Sk_Item = base.CreateObjectSet<Sk_Item>("Sk_Item");
+                }
+                return _Sk_Item;
+            }
+        }
+        private ObjectSet<Sk_Item> _Sk_Item;
 
         #endregion
 
@@ -158,19 +182,11 @@ namespace Songkhue.SE303.Core
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Sk_Item EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Sk_Order EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToSk_Item(Sk_Item sk_Item)
+        public void AddToSk_Order(Sk_Order sk_Order)
         {
-            base.AddObject("Sk_Item", sk_Item);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Sk_User EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToSk_User(Sk_User sk_User)
-        {
-            base.AddObject("Sk_User", sk_User);
+            base.AddObject("Sk_Order", sk_Order);
         }
     
         /// <summary>
@@ -182,11 +198,27 @@ namespace Songkhue.SE303.Core
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Sk_Order EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Sk_User EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToSk_Order(Sk_Order sk_Order)
+        public void AddToSk_User(Sk_User sk_User)
         {
-            base.AddObject("Sk_Order", sk_Order);
+            base.AddObject("Sk_User", sk_User);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTosysdiagrams(sysdiagram sysdiagram)
+        {
+            base.AddObject("sysdiagrams", sysdiagram);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Sk_Item EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSk_Item(Sk_Item sk_Item)
+        {
+            base.AddObject("Sk_Item", sk_Item);
         }
 
         #endregion
@@ -330,6 +362,32 @@ namespace Songkhue.SE303.Core
         #endregion
 
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Dev_Sk_SE303Model", "FK_Sk_Order_Sk_Branch", "Sk_Order")]
+        public EntityCollection<Sk_Order> Sk_Order
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Sk_Order>("Dev_Sk_SE303Model.FK_Sk_Order_Sk_Branch", "Sk_Order");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Sk_Order>("Dev_Sk_SE303Model.FK_Sk_Order_Sk_Branch", "Sk_Order", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>
@@ -491,6 +549,32 @@ namespace Songkhue.SE303.Core
         #endregion
 
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Dev_Sk_SE303Model", "FK_Sk_OrderDetails_Sk_Item", "Sk_OrderDetails")]
+        public EntityCollection<Sk_OrderDetails> Sk_OrderDetails
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Sk_OrderDetails>("Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Item", "Sk_OrderDetails");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Sk_OrderDetails>("Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Item", "Sk_OrderDetails", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>
@@ -600,6 +684,70 @@ namespace Songkhue.SE303.Core
         #endregion
 
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Dev_Sk_SE303Model", "FK_Sk_Order_Sk_Branch", "Sk_Branch")]
+        public Sk_Branch Sk_Branch
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sk_Branch>("Dev_Sk_SE303Model.FK_Sk_Order_Sk_Branch", "Sk_Branch").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sk_Branch>("Dev_Sk_SE303Model.FK_Sk_Order_Sk_Branch", "Sk_Branch").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Sk_Branch> Sk_BranchReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sk_Branch>("Dev_Sk_SE303Model.FK_Sk_Order_Sk_Branch", "Sk_Branch");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Sk_Branch>("Dev_Sk_SE303Model.FK_Sk_Order_Sk_Branch", "Sk_Branch", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Dev_Sk_SE303Model", "FK_Sk_OrderDetails_Sk_Order", "Sk_OrderDetails")]
+        public EntityCollection<Sk_OrderDetails> Sk_OrderDetails
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Sk_OrderDetails>("Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Order", "Sk_OrderDetails");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Sk_OrderDetails>("Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Order", "Sk_OrderDetails", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>
@@ -787,6 +935,86 @@ namespace Songkhue.SE303.Core
         #endregion
 
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Dev_Sk_SE303Model", "FK_Sk_OrderDetails_Sk_Order", "Sk_Order")]
+        public Sk_Order Sk_Order
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sk_Order>("Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Order", "Sk_Order").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sk_Order>("Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Order", "Sk_Order").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Sk_Order> Sk_OrderReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sk_Order>("Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Order", "Sk_Order");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Sk_Order>("Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Order", "Sk_Order", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Dev_Sk_SE303Model", "FK_Sk_OrderDetails_Sk_Item", "Sk_Item")]
+        public Sk_Item Sk_Item
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sk_Item>("Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Item", "Sk_Item").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sk_Item>("Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Item", "Sk_Item").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Sk_Item> Sk_ItemReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sk_Item>("Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Item", "Sk_Item");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Sk_Item>("Dev_Sk_SE303Model.FK_Sk_OrderDetails_Sk_Item", "Sk_Item", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>
@@ -918,6 +1146,163 @@ namespace Songkhue.SE303.Core
         private global::System.String _Email;
         partial void OnEmailChanging(global::System.String value);
         partial void OnEmailChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Dev_Sk_SE303Model", Name="sysdiagram")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class sysdiagram : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new sysdiagram object.
+        /// </summary>
+        /// <param name="name">Initial value of the name property.</param>
+        /// <param name="principal_id">Initial value of the principal_id property.</param>
+        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
+        public static sysdiagram Createsysdiagram(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
+        {
+            sysdiagram sysdiagram = new sysdiagram();
+            sysdiagram.name = name;
+            sysdiagram.principal_id = principal_id;
+            sysdiagram.diagram_id = diagram_id;
+            return sysdiagram;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
+            }
+        }
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 principal_id
+        {
+            get
+            {
+                return _principal_id;
+            }
+            set
+            {
+                Onprincipal_idChanging(value);
+                ReportPropertyChanging("principal_id");
+                _principal_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("principal_id");
+                Onprincipal_idChanged();
+            }
+        }
+        private global::System.Int32 _principal_id;
+        partial void Onprincipal_idChanging(global::System.Int32 value);
+        partial void Onprincipal_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 diagram_id
+        {
+            get
+            {
+                return _diagram_id;
+            }
+            set
+            {
+                if (_diagram_id != value)
+                {
+                    Ondiagram_idChanging(value);
+                    ReportPropertyChanging("diagram_id");
+                    _diagram_id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("diagram_id");
+                    Ondiagram_idChanged();
+                }
+            }
+        }
+        private global::System.Int32 _diagram_id;
+        partial void Ondiagram_idChanging(global::System.Int32 value);
+        partial void Ondiagram_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> version
+        {
+            get
+            {
+                return _version;
+            }
+            set
+            {
+                OnversionChanging(value);
+                ReportPropertyChanging("version");
+                _version = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("version");
+                OnversionChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _version;
+        partial void OnversionChanging(Nullable<global::System.Int32> value);
+        partial void OnversionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] definition
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_definition);
+            }
+            set
+            {
+                OndefinitionChanging(value);
+                ReportPropertyChanging("definition");
+                _definition = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("definition");
+                OndefinitionChanged();
+            }
+        }
+        private global::System.Byte[] _definition;
+        partial void OndefinitionChanging(global::System.Byte[] value);
+        partial void OndefinitionChanged();
 
         #endregion
 

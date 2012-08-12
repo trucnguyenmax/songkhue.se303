@@ -630,6 +630,8 @@
     <Content Include="Areas\Admin\Views\Employee\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Employee\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Employee\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\Edit.cshtml" />
     <None Include="Grid.mvc.readme" />
     <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
