@@ -43,5 +43,10 @@ namespace Songkhue.SE303.Core.Item
         {
             return _reporsitory.Fetch().Where(x => x.Id == id).SingleOrDefault();
         }
+
+        public IEnumerable<Sk_Item> GetItemsByGroup(int group)
+        {
+            return _reporsitory.Fetch().Where(x => x.ItemGroup == group).OrderByDescending(x => x.Id).AsEnumerable();
+        }
     }
 }

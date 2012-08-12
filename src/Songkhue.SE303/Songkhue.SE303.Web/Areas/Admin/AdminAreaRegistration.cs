@@ -18,6 +18,16 @@ namespace Songkhue.SE303.Web.Areas.Admin
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
+
+
+            );
+
+            context.MapRoute(
+                   "Admin_default2",
+                   "Admin/{controller}/{action}/{group}",
+                   new { action = "Index", group = UrlParameter.Optional }
+
+
             );
         }
     }

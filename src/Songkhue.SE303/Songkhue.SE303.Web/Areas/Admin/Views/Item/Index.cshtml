@@ -1,5 +1,24 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model IEnumerable<Songkhue.SE303.Core.Sk_Item>
+@{
+    ViewBag.Title = "Quản lý thực đơn";
 }
-
-<h2>Index</h2>
+<div>
+    <table style="text-transform: uppercase">
+        <tr>
+            <td style="padding: 5px 18px">
+                @Html.ActionLink("Nước uống", "Index", "Item", new { @Area = "Admin", @group = 1 }, new { })
+            </td>
+            <td style="padding: 5px 18px">
+                @Html.ActionLink("Món ăn", "Index", "Item", new { @Area = "Admin", @group = 2 }, new { })
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+@(Html.Telerik().Grid(Model).Name("Details")
+                        .Columns(columns =>
+        {
+            columns.Bound(o => o.Id).Width(100).Title("ID").Width(50).Format("#{0}");
+            columns.Bound(o => o.Name).Title("Tên");
+            columns.Bound(o => o.Price).Title("Giá").Format("{0:#,###} VND");
+        }))

@@ -3,6 +3,7 @@
 @using Telerik.Web.Mvc.UI
 @model IEnumerable<Songkhue.SE303.Core.Order.Models.OrderModel>
 @{
+    ViewBag.Title = "Quản lý hóa đơn";
     Songkhue.SE303.Core.Order.OrderDetailsManager _orderDetailsManager = new Songkhue.SE303.Core.Order.OrderDetailsManager();
 
     int orderId = 0;
