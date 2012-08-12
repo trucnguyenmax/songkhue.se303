@@ -1,0 +1,25 @@
+﻿@model Songkhue.SE303.Core.Sk_User
+@*@model Songkhue.SE303.Web.Sk_User*@
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Employee</legend>
+
+    <div class="display-label">Created On:</div>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedOn)</div>
+
+    <div class="display-label">User name:</div>
+    <div class="display-field">@Model.Username</div>
+
+    <div class="display-label">Email:</div>
+    <div class="display-field">@Model.Email</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
