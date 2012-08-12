@@ -1,0 +1,6 @@
+﻿Yêu cầu hệ thống:
+
+Database: SQL server 2008 R2
+Web Server: IIS 7.5
+
+
