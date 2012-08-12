@@ -55,6 +55,7 @@
       <DependentUpon>DbModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Item\ItemManager.cs" />
+    <Compile Include="Order\Models\OrderDetailsModel.cs" />
     <Compile Include="Order\Models\OrderModel.cs" />
     <Compile Include="Order\OrderDetailsManager.cs" />
     <Compile Include="Order\OrderManager.cs" />

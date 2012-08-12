@@ -10,7 +10,7 @@ namespace Songkhue.SE303.Core.Item
         private Dev_Sk_SE303Entities _context;
         private Repository<Sk_Item> _reporsitory;
 
-        private ItemManager()
+        public ItemManager()
         {
             _context = new Dev_Sk_SE303Entities();
             _reporsitory = new Repository<Sk_Item>(_context, true);
@@ -37,6 +37,11 @@ namespace Songkhue.SE303.Core.Item
         public IQueryable<Sk_Item> GetItems()
         {
             return _reporsitory.Fetch();
+        }
+
+        public Sk_Item GetItemById(int id)
+        {
+            return _reporsitory.Fetch().Where(x => x.Id == id).SingleOrDefault();
         }
     }
 }
